@@ -12,6 +12,12 @@ const setPictures = (resp) => ({
   loading: false
 });
 
+const loadPictures = (resp) => (prevState) => ({
+  pictures: [...prevState.pictures, ...resp.photos.photo],
+  page: resp.photos.page,
+  loading: false
+});
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -32,9 +38,8 @@ class App extends React.Component {
   }
 
   onScroll = () => {
-    if (
-      (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) && this.state.pictures.length > 0) {
-      console.log('add more pictures')
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100) && this.state.pictures.length > 0 && !this.state.loading) {
+      this.fetchPictures(this.state.page + 1)
     }
   };
 
@@ -47,7 +52,7 @@ class App extends React.Component {
         if (page === 0) {
           this.setState(setPictures(resp))
         } else {
-          console.log('more pictures to come')
+          this.setState(loadPictures(resp))
         }
       });
   };
@@ -65,6 +70,7 @@ class App extends React.Component {
                 <div className="gallery-wrapper">
                   {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
                     let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '_s.jpg';
+
                     return <img key={picture.id} src={path} alt={'dogs'}/>
                   })}
                 </div>
