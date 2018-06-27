@@ -47,7 +47,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="background">
         <Container>
           <Row>
             <Col xs={12} sm={10} offset={{sm: 1}}>

@@ -6,6 +6,9 @@ body {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent; }
 
+.background {
+  background-image: url("./media/halftone-yellow.png"); }
+
 .gallery-wrapper img {
   margin: 10px;
   filter: grayscale(100%);
