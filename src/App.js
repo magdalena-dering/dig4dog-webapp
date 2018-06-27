@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Container, Row, Col} from 'react-grid-system';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,12 +22,18 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="gallery-wrapper">
-          {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
-            let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '_s.jpg';
-            return <img key={picture.id} src={path} alt={'dogs'}/>
-          })}
-        </div>
+        <Container>
+          <Row>
+            <Col xs={12} sm={10} offset={{sm: 1}}>
+              <div className="gallery-wrapper">
+                {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
+                  let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '_s.jpg';
+                  return <img key={picture.id} src={path} alt={'dogs'}/>
+                })}
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
