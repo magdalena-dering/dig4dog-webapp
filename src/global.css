@@ -5,3 +5,10 @@ body {
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent; }
+
+.gallery-wrapper img {
+  margin: 10px;
+  filter: grayscale(100%);
+  cursor: pointer; }
+  .gallery-wrapper img:hover {
+    filter: none; }

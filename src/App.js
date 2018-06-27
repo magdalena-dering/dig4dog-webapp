@@ -22,10 +22,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
-          let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '_s.jpg';
-          return <img key={picture.id} src={path} alt={'dogs'}/>
-        })}
+        <div className="gallery-wrapper">
+          {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
+            let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '_s.jpg';
+            return <img key={picture.id} src={path} alt={'dogs'}/>
+          })}
+        </div>
       </div>
     );
   }
