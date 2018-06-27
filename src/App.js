@@ -1,23 +1,49 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-grid-system';
 
+
+const getPictures = (page) =>
+  `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f30805949d59829de1f62b774103a3c2&text=dogs&per_page=100&page=${page}&format=json&nojsoncallback=1`;
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {pictures: []}
+    this.state = {
+      pictures: [],
+      page: null
+    }
   }
 
   componentDidMount() {
-    fetch('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f30805949d59829de1f62b774103a3c2&text=dogs&per_page=100&page=1&format=json&nojsoncallback=1')
-      .then(resp => {
-        return resp.json();
-      })
+    this.fetchPictures(0);
+    window.addEventListener('scroll', this.onScroll, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
+  }
+
+  onScroll = () => {
+    if (
+      (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) && this.state.pictures.length > 0) {
+      console.log('add more pictures')
+    }
+  };
+
+  fetchPictures = (page) => {
+    fetch(getPictures(page))
+      .then(resp => resp.json())
       .then(resp => {
         let pictures = resp.photos.photo;
 
-        this.setState({pictures: pictures})
+        if (page === 0) {
+          this.setState({pictures: pictures})
+        } else {
+          console.log('more pictures to come')
+        }
       });
-  }
+  };
 
   render() {
     return (
