@@ -8,7 +8,7 @@ const getPictures = (page) =>
 
 const setPictures = (resp) => ({
   pictures: resp.photos.photo,
-  page: resp.page
+  page: resp.photos.page
 });
 
 class App extends React.Component {
