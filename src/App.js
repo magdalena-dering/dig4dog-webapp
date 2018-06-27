@@ -9,13 +9,17 @@ const getPictures = (page) =>
 const setPictures = (resp) => ({
   pictures: resp.photos.photo,
   page: resp.photos.page,
-  loading: false
+  loading: false,
+  error: false,
+  message: ''
 });
 
 const loadPictures = (resp) => (prevState) => ({
   pictures: [...prevState.pictures, ...resp.photos.photo],
   page: resp.photos.page,
-  loading: false
+  loading: false,
+  error: false,
+  message: ''
 });
 
 class App extends React.Component {
@@ -24,7 +28,9 @@ class App extends React.Component {
     this.state = {
       pictures: [],
       page: null,
-      loading: false
+      loading: false,
+      error: false,
+      message: ''
     }
   }
 
@@ -49,12 +55,17 @@ class App extends React.Component {
     fetch(getPictures(page))
       .then(resp => resp.json())
       .then(resp => {
-        if (page === 0) {
-          this.setState(setPictures(resp))
-        } else {
-          this.setState(loadPictures(resp))
+        if (resp.message) {
+          this.setState({loading: false, error: true, message: resp.message});
         }
-      });
+        else {
+          if (page === 0) {
+            this.setState(setPictures(resp))
+          } else {
+            this.setState(loadPictures(resp))
+          }
+        }
+      })
   };
 
   render() {
@@ -73,6 +84,11 @@ class App extends React.Component {
 
                     return <img key={picture.id} src={path} alt={'dogs'}/>
                   })}
+                  {this.state.error &&
+                  <div className="error">
+                    <p>An error occured!</p>
+                    <p>{this.state.message}</p>
+                  </div>}
                 </div>
               }
             </Col>
