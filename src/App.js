@@ -6,6 +6,11 @@ const getPictures = (page) =>
   `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f30805949d59829de1f62b774103a3c2&text=dogs&per_page=100&page=${page}&format=json&nojsoncallback=1`;
 
 
+const setPictures = (resp) => ({
+  pictures: resp.photos.photo,
+  page: resp.page
+});
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -35,10 +40,8 @@ class App extends React.Component {
     fetch(getPictures(page))
       .then(resp => resp.json())
       .then(resp => {
-        let pictures = resp.photos.photo;
-
         if (page === 0) {
-          this.setState({pictures: pictures})
+          this.setState(setPictures(resp))
         } else {
           console.log('more pictures to come')
         }
