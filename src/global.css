@@ -1,3 +1,14 @@
+@keyframes ball {
+  0%, 100% {
+    animation-timing-function: cubic-bezier(0.45, 0, 0.9, 0.55); }
+  0% {
+    transform: translate(0, 0); }
+  50% {
+    transform: translate(0, 108px);
+    animation-timing-function: cubic-bezier(0, 0.45, 0.55, 0.9); }
+  100% {
+    transform: translate(0, 0); } }
+
 body {
   margin: 0;
   padding: 0; }
@@ -7,7 +18,8 @@ body {
   -webkit-tap-highlight-color: transparent; }
 
 .background {
-  background-image: url("./media/halftone-yellow.png"); }
+  background-image: url("./media/halftone-yellow.png");
+  min-height: 100vh; }
 
 .gallery-wrapper img {
   margin: 10px;
@@ -15,3 +27,17 @@ body {
   cursor: pointer; }
   .gallery-wrapper img:hover {
     filter: none; }
+
+.gallery-loader {
+  position: relative;
+  width: 100%;
+  height: 100vh; }
+  .gallery-loader .ball {
+    width: 52px;
+    height: 52px;
+    position: absolute;
+    top: calc(50% - 52px/2);
+    left: calc(50% - 52px/2);
+    border-radius: 50%;
+    background: black;
+    animation: ball 1s linear infinite; }

@@ -8,7 +8,8 @@ const getPictures = (page) =>
 
 const setPictures = (resp) => ({
   pictures: resp.photos.photo,
-  page: resp.photos.page
+  page: resp.photos.page,
+  loading: false
 });
 
 class App extends React.Component {
@@ -16,7 +17,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       pictures: [],
-      page: null
+      page: null,
+      loading: false
     }
   }
 
@@ -37,6 +39,8 @@ class App extends React.Component {
   };
 
   fetchPictures = (page) => {
+    this.setState({loading: true});
+
     fetch(getPictures(page))
       .then(resp => resp.json())
       .then(resp => {
@@ -54,12 +58,17 @@ class App extends React.Component {
         <Container>
           <Row>
             <Col xs={12} sm={10} offset={{sm: 1}}>
-              <div className="gallery-wrapper">
-                {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
-                  let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '_s.jpg';
-                  return <img key={picture.id} src={path} alt={'dogs'}/>
-                })}
-              </div>
+              {this.state.loading ?
+                <div className="gallery-loader">
+                  <div className="ball"/>
+                </div> :
+                <div className="gallery-wrapper">
+                  {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
+                    let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '_s.jpg';
+                    return <img key={picture.id} src={path} alt={'dogs'}/>
+                  })}
+                </div>
+              }
             </Col>
           </Row>
         </Container>
