@@ -1,3 +1,9 @@
+$black: #070707;
+$white: #FFFCF2;
+$red: #BA2D0B;
+$orange: #FACB6F;
+$yellow: #FEDB67;
+
 @keyframes ball {
   0%, 100% {
     animation-timing-function: cubic-bezier(0.45, 0, 0.9, 0.55);
@@ -55,7 +61,7 @@ h2 {
 .navigation {
   height: 50px;
   width: 100%;
-  background-color: black;
+  background-color: $black;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -88,7 +94,7 @@ h2 {
     align-items: start;
     justify-content: center;
 
-    background-color: white;
+    background-color: $white;
     margin: 10px;
     padding: 20px;
 
@@ -163,7 +169,29 @@ h2 {
     left: calc(50% - 52px / 2);
 
     border-radius: 50%;
-    background: black;
+    background: $black;
     animation: ball 1s linear infinite;
+  }
+}
+
+.button {
+  height: 50px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Anonymous Pro', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: $white;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: black;
+  border: 1px solid black;
+  margin: 20px auto;
+
+  &:hover {
+    color: $yellow;
   }
 }
