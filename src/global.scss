@@ -82,6 +82,7 @@ h2 {
   margin: 50px 0 100px 0;
 
   .picture {
+    width: 295px;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -90,6 +91,10 @@ h2 {
     background-color: white;
     margin: 10px;
     padding: 20px;
+
+    @media (min-width: 768px) {
+      width: 335px;
+    }
 
     .caption {
       width: 100%;
@@ -103,10 +108,14 @@ h2 {
       }
 
       > p {
-        width: 300px;
+        width: 255px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        @media (min-width: 768px) {
+          width: 295px;
+        }
       }
 
       div {
@@ -123,10 +132,13 @@ h2 {
 
     img {
       width: auto;
-      max-width: 300px;
+      max-width: 255px;
       height: 195px;
       filter: grayscale(100%);
-      cursor: pointer;
+
+      @media (min-width: 768px) {
+        max-width: 295px;
+      }
     }
 
     &:hover {
