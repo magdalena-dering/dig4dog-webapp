@@ -11,6 +11,7 @@
 
 body {
   font-family: 'Anonymous Pro', monospace;
+  font-size: 14px;
   margin: 0;
   padding: 0; }
 
@@ -32,12 +33,40 @@ body {
   font-weight: 700; }
 
 .gallery-wrapper {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 100px 0; }
-  .gallery-wrapper img {
-    margin: 8px;
-    filter: grayscale(100%);
-    cursor: pointer; }
-    .gallery-wrapper img:hover {
+  .gallery-wrapper .picture {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    background-color: white;
+    margin: 10px;
+    padding: 20px; }
+    .gallery-wrapper .picture .caption {
+      width: 100%; }
+      .gallery-wrapper .picture .caption > p {
+        width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+      .gallery-wrapper .picture .caption div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between; }
+        .gallery-wrapper .picture .caption div > p {
+          max-width: 200px; }
+    .gallery-wrapper .picture img {
+      width: auto;
+      max-width: 300px;
+      height: 195px;
+      filter: grayscale(100%);
+      cursor: pointer; }
+    .gallery-wrapper .picture:hover img {
       filter: none; }
 
 .gallery-loader {

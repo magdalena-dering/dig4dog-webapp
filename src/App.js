@@ -3,7 +3,7 @@ import {Container, Row, Col} from 'react-grid-system';
 
 
 const getPictures = (page) =>
-  `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=52b91cab9d9970ca63cf75a911377263&text=dogs&per_page=100&page=${page}&format=json&nojsoncallback=1`;
+  `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=52b91cab9d9970ca63cf75a911377263&text=dogs&per_page=100&page=${page}&format=json&nojsoncallback=1&extras=description, date_taken, owner_name`;
 
 
 const setPictures = (resp) => ({
@@ -40,9 +40,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.el) {
-      this.el.scrollIntoView({behavior: "smooth"});
-    }
+    window.scrollTo(0, window.innerHeight * 11 * (this.state.page - 1))
   }
 
   componentWillUnmount() {
@@ -79,20 +77,31 @@ class App extends React.Component {
       <div className="background">
         <Container>
           <Row>
-            <Col xs={12} sm={10} offset={{sm: 1}}>
+            <Col xs={12}>
               {this.state.loading ?
                 <div className="gallery-loader">
                   <div className="ball"/>
                 </div> :
                 <div className="gallery-wrapper">
                   {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
-                    let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '_s.jpg';
+                    let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
 
-                    return <img key={picture.id} src={path} alt={'dogs'}/>
+                    // console.log(picture)
+
+                    let date = picture.datetaken.match(/\d{4}-\d{2}-\d{2}/);
+
+                    return (
+                      <div key={picture.id} className="picture">
+                        <img src={path} alt={'dogs'}/>
+                        <div className="caption">
+                          {picture.description._content.length > 0 ? <p>{picture.description._content}</p> : <p>--- no description ---</p>}
+                          <div>
+                            <p style={{marginRight: 20}}>{picture.ownername}</p>
+                            <p>{date}</p>
+                          </div>
+                        </div>
+                      </div>)
                   })}
-
-                  <div style={{float: "left", clear: "both"}} ref={el => this.el = el}/>
-
                   {this.state.error &&
                   <div className="error">
                     <p>An error occured!</p>
