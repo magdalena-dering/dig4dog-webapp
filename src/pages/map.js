@@ -2,6 +2,8 @@ import React from 'react';
 import {Container, Row, Col} from 'react-grid-system';
 import {GoogleApiWrapper} from 'google-maps-react' ;
 
+import Loader from '../components/Loader';
+
 
 class MapPage extends React.Component {
   componentDidMount() {
@@ -19,7 +21,6 @@ class MapPage extends React.Component {
       });
 
       this.map = new google.maps.Map(this.refs.map, mapConfig);
-
     }
   }
 
@@ -41,5 +42,6 @@ class MapPage extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAR5fkhOWtnrd2SC09-ZKOXjHZKrhElaec'
+  apiKey: 'AIzaSyAR5fkhOWtnrd2SC09-ZKOXjHZKrhElaec',
+  LoadingContainer: Loader
 })(MapPage)

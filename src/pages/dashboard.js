@@ -6,6 +6,8 @@ import * as routes from '../shared/routes';
 import {getPictures} from '../api';
 import {setPictures, loadPictures} from '../shared/helper';
 
+import Loader from '../components/Loader';
+
 
 class DashboardPage extends React.Component {
   constructor(props) {
@@ -63,9 +65,7 @@ class DashboardPage extends React.Component {
         <Row>
           <Col xs={12}>
             {this.state.loading ?
-              <div className="gallery-loader">
-                <div className="ball"/>
-              </div> :
+              <Loader/> :
               <div className="gallery-wrapper" style={{marginTop: 100}}>
                 {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
                   let url = 'https://www.flickr.com/photos/' + picture.owner + '/' + picture.id;

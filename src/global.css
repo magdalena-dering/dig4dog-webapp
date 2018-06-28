@@ -109,11 +109,11 @@ h2 {
     .gallery-wrapper .picture:hover img {
       filter: none; }
 
-.gallery-loader {
+.loader {
   position: relative;
   width: 100%;
   height: 100vh; }
-  .gallery-loader .ball {
+  .loader .ball {
     width: 52px;
     height: 52px;
     position: absolute;

@@ -4,6 +4,8 @@ import {Container, Row, Col} from 'react-grid-system';
 import {getOther} from '../api';
 import {setPictures, loadPictures} from '../shared/helper';
 
+import Loader from '../components/Loader';
+
 
 class UserPage extends React.Component {
   constructor(props) {
@@ -61,13 +63,11 @@ class UserPage extends React.Component {
         <Row>
           <Col xs={12}>
             {this.state.loading ?
-              <div className="gallery-loader">
-                <div className="ball"/>
-              </div> :
+              <Loader/> :
               <div>
                 {this.state.pictures.length > 0 ?
                   <div>
-                    <h2 style={{paddingTop:100}}>Pictures of {this.state.pictures[0].ownername}</h2>
+                    <h2 style={{paddingTop: 100}}>Pictures of {this.state.pictures[0].ownername}</h2>
                     <div className="gallery-wrapper">
                       {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
                         let url = 'https://www.flickr.com/photos/' + picture.owner + '/' + picture.id;
