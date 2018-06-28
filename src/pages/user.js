@@ -70,12 +70,13 @@ class UserPage extends React.Component {
                     <h2 style={{paddingTop:100}}>Pictures of {this.state.pictures[0].ownername}</h2>
                     <div className="gallery-wrapper">
                       {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
+                        let url = 'https://www.flickr.com/photos/' + picture.owner + '/' + picture.id;
                         let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
                         let date = picture.datetaken.match(/\d{4}-\d{2}-\d{2}/);
 
                         return (
                           <div key={picture.id} className="picture">
-                            <img src={path} alt={'dogs'}/>
+                            <a href={url} target="_blank" rel="noopener noreferrer"><img src={path} alt={picture.title}/></a>
                             <div className="caption">
                               <p style={{fontWeight: 700}}>{picture.title}</p>
                               {picture.description._content.length > 0 ? <p>{picture.description._content}</p> : <p>--- no description ---</p>}
