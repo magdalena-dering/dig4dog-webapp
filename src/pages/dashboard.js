@@ -66,7 +66,7 @@ class DashboardPage extends React.Component {
               <div className="gallery-loader">
                 <div className="ball"/>
               </div> :
-              <div className="gallery-wrapper">
+              <div className="gallery-wrapper" style={{marginTop: 100}}>
                 {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
                   let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
                   let date = picture.datetaken.match(/\d{4}-\d{2}-\d{2}/);

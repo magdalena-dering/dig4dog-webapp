@@ -5,12 +5,14 @@ import * as routes from '../shared/routes';
 
 import DashboardPage from '../pages/dashboard';
 import UserPage from '../pages/user';
+import Navigation from './Navigation';
 
 
 const App = () => {
   return (
     <Router history={null}>
       <div className="background" style={{position: 'relative'}}>
+        <Navigation/>
         <Route exact path={routes.DASHBOARD} component={DashboardPage}/>
         <Route exact path={routes.USER + ':id'} component={(props) => <UserPage {...props}/>}/>
       </div>

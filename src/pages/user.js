@@ -67,7 +67,7 @@ class UserPage extends React.Component {
               <div>
                 {this.state.pictures.length > 0 ?
                   <div>
-                    <h1>Pictures of {this.state.pictures[0].ownername}</h1>
+                    <h2 style={{paddingTop:100}}>Pictures of {this.state.pictures[0].ownername}</h2>
                     <div className="gallery-wrapper">
                       {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
                         let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
