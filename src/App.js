@@ -3,7 +3,7 @@ import {Container, Row, Col} from 'react-grid-system';
 
 
 const getPictures = (page) =>
-  `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f30805949d59829de1f62b774103a3c2&text=dogs&per_page=100&page=${page}&format=json&nojsoncallback=1`;
+  `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=52b91cab9d9970ca63cf75a911377263&text=dogs&per_page=100&page=${page}&format=json&nojsoncallback=1`;
 
 
 const setPictures = (resp) => ({
@@ -39,13 +39,19 @@ class App extends React.Component {
     window.addEventListener('scroll', this.onScroll, false);
   }
 
+  componentDidUpdate() {
+    if (this.el) {
+      this.el.scrollIntoView({behavior: "smooth"});
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll, false);
   }
 
   onScroll = () => {
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100) && this.state.pictures.length > 0 && !this.state.loading) {
-      this.fetchPictures(this.state.page + 1)
+    if ((window.innerHeight + window.scrollY) === (document.body.offsetHeight) && this.state.pictures.length > 0 && !this.state.loading) {
+      this.fetchPictures(this.state.page + 1);
     }
   };
 
@@ -84,11 +90,15 @@ class App extends React.Component {
 
                     return <img key={picture.id} src={path} alt={'dogs'}/>
                   })}
+
+                  <div style={{float: "left", clear: "both"}} ref={el => this.el = el}/>
+
                   {this.state.error &&
                   <div className="error">
                     <p>An error occured!</p>
                     <p>{this.state.message}</p>
-                  </div>}
+                  </div>
+                  }
                 </div>
               }
             </Col>

@@ -26,13 +26,13 @@ body {
 }
 
 .background {
+  min-height: 100vh;
   background-image: url("./media/halftone-yellow.png");
-  min-height: 100vh
 }
 
 .error {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,8 +41,10 @@ body {
 }
 
 .gallery-wrapper {
+  margin: 100px 0;
+
   img {
-    margin: 10px;
+    margin: 8px;
     filter: grayscale(100%);
 
     cursor: pointer;
