@@ -31,7 +31,7 @@ body {
   background-image: url("./media/halftone-yellow.png");
 }
 
-.error {
+.full-page {
   width: 100%;
   height: calc(100vh - 200px);
   display: flex;
@@ -61,6 +61,14 @@ body {
 
     .caption {
       width: 100%;
+
+      a {
+        color: black;
+
+        &:hover {
+          font-weight: 700;
+        }
+      }
 
       > p {
         width: 300px;

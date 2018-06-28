@@ -1,6 +1,8 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-grid-system';
+import {Link, withRouter} from 'react-router-dom';
 
+import * as routes from '../routes';
 
 const getPictures = (page) =>
   `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=52b91cab9d9970ca63cf75a911377263&text=dogs&per_page=100&page=${page}&format=json&nojsoncallback=1&extras=description, date_taken, owner_name`;
@@ -73,48 +75,46 @@ class DashboardPage extends React.Component {
 
   render() {
     return (
-      <div className="background">
-        <Container>
-          <Row>
-            <Col xs={12}>
-              {this.state.loading ?
-                <div className="gallery-loader">
-                  <div className="ball"/>
-                </div> :
-                <div className="gallery-wrapper">
-                  {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
-                    let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
+      <Container>
+        <Row>
+          <Col xs={12}>
+            {this.state.loading ?
+              <div className="gallery-loader">
+                <div className="ball"/>
+              </div> :
+              <div className="gallery-wrapper">
+                {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
+                  let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
+                  let date = picture.datetaken.match(/\d{4}-\d{2}-\d{2}/);
 
-                    console.log(picture)
-
-                    let date = picture.datetaken.match(/\d{4}-\d{2}-\d{2}/);
-
-                    return (
-                      <div key={picture.id} className="picture">
-                        <img src={path} alt={'dogs'}/>
-                        <div className="caption">
-                          {picture.description._content.length > 0 ? <p>{picture.description._content}</p> : <p>--- no description ---</p>}
-                          <div>
+                  return (
+                    <div key={picture.id} className="picture">
+                      <img src={path} alt={'dogs'}/>
+                      <div className="caption">
+                        <p style={{fontWeight: 700}}>{picture.title}</p>
+                        {picture.description._content.length > 0 ? <p>{picture.description._content}</p> : <p>--- no description ---</p>}
+                        <div>
+                          <Link to={routes.USER + picture.owner}>
                             <p style={{marginRight: 20}}>{picture.ownername}</p>
-                            <p>{date}</p>
-                          </div>
+                          </Link>
+                          <p>{date}</p>
                         </div>
-                      </div>)
-                  })}
-                  {this.state.error &&
-                  <div className="error">
-                    <p>An error occured!</p>
-                    <p>{this.state.message}</p>
-                  </div>
-                  }
+                      </div>
+                    </div>)
+                })}
+                {this.state.error &&
+                <div className="full-page">
+                  <p>An error occured!</p>
+                  <p>{this.state.message}</p>
                 </div>
-              }
-            </Col>
-          </Row>
-        </Container>
-      </div>
+                }
+              </div>
+            }
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
 
-export default DashboardPage;
+export default withRouter(DashboardPage);

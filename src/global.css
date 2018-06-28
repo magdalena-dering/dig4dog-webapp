@@ -23,7 +23,7 @@ body {
   min-height: 100vh;
   background-image: url("./media/halftone-yellow.png"); }
 
-.error {
+.full-page {
   width: 100%;
   height: calc(100vh - 200px);
   display: flex;
@@ -48,6 +48,10 @@ body {
     padding: 20px; }
     .gallery-wrapper .picture .caption {
       width: 100%; }
+      .gallery-wrapper .picture .caption a {
+        color: black; }
+        .gallery-wrapper .picture .caption a:hover {
+          font-weight: 700; }
       .gallery-wrapper .picture .caption > p {
         width: 300px;
         white-space: nowrap;
