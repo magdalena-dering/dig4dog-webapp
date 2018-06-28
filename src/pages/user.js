@@ -1,25 +1,9 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-grid-system';
 
+import {getOther} from '../api';
+import {setPictures, loadPictures} from '../shared/helper';
 
-const getOther = (page, user) =>
-  `https://api.flickr.com/services/rest/?method=flickr.people.getPhotosOf&api_key=52b91cab9d9970ca63cf75a911377263&user_id=${user}&per_page=100&page=${page}&format=json&nojsoncallback=1&extras=description, date_taken, owner_name`;
-
-const setPictures = (resp) => ({
-  pictures: resp.photos.photo,
-  page: resp.photos.page,
-  loading: false,
-  error: false,
-  message: ''
-});
-
-const loadPictures = (resp) => (prevState) => ({
-  pictures: [...prevState.pictures, ...resp.photos.photo],
-  page: resp.photos.page,
-  loading: false,
-  error: false,
-  message: ''
-});
 
 class UserPage extends React.Component {
   constructor(props) {

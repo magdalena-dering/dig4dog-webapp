@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import * as routes from './routes';
+import * as routes from '../shared/routes';
 
-import DashboardPage from './pages/dashboard';
-import UserPage from './pages/user';
+import DashboardPage from '../pages/dashboard';
+import UserPage from '../pages/user';
 
 
 const App = () => {

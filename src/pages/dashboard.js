@@ -2,26 +2,10 @@ import React from 'react';
 import {Container, Row, Col} from 'react-grid-system';
 import {Link, withRouter} from 'react-router-dom';
 
-import * as routes from '../routes';
+import * as routes from '../shared/routes';
+import {getPictures} from '../api';
+import {setPictures, loadPictures} from '../shared/helper';
 
-const getPictures = (page) =>
-  `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=52b91cab9d9970ca63cf75a911377263&text=dogs&per_page=100&page=${page}&format=json&nojsoncallback=1&extras=description, date_taken, owner_name`;
-
-const setPictures = (resp) => ({
-  pictures: resp.photos.photo,
-  page: resp.photos.page,
-  loading: false,
-  error: false,
-  message: ''
-});
-
-const loadPictures = (resp) => (prevState) => ({
-  pictures: [...prevState.pictures, ...resp.photos.photo],
-  page: resp.photos.page,
-  loading: false,
-  error: false,
-  message: ''
-});
 
 class DashboardPage extends React.Component {
   constructor(props) {
