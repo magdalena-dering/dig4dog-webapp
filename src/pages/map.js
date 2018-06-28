@@ -3,7 +3,7 @@ import {Container, Row, Col} from 'react-grid-system';
 import {GoogleApiWrapper} from 'google-maps-react' ;
 
 import Loader from '../components/Loader';
-
+import MapStyles from '../media/styles';
 
 class MapPage extends React.Component {
   componentDidMount() {
@@ -17,7 +17,8 @@ class MapPage extends React.Component {
       const mapConfig = Object.assign({}, {
         center: {lat: 52.237049, lng: 21.017532},
         zoom: 11,
-        mapTypeId: 'roadmap'
+        mapTypeId: 'roadmap',
+        styles: MapStyles
       });
 
       this.map = new google.maps.Map(this.refs.map, mapConfig);
@@ -29,7 +30,8 @@ class MapPage extends React.Component {
       <Container>
         <Row>
           <Col xs={12}>
-            <div className="full-page" style={{height: '100vh'}}>
+            <h2 style={{paddingTop: 100}}>Dogs in nearby</h2>
+            <div className="full-page">
               <div ref="map" style={{width: '100%', height: '75vh'}}>
                 <p>Loading map...</p>
               </div>
