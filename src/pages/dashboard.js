@@ -18,6 +18,7 @@ class DashboardPage extends React.Component {
       loading: false,
       error: false,
       message: '',
+      filters: false,
       title: '',
       author: ''
     }
@@ -96,21 +97,29 @@ class DashboardPage extends React.Component {
             {this.state.loading ?
               <Loader/> :
               <div>
-                <div className="filters">
-                  <div className="field">
-                    <label htmlFor="title">Title:</label>
-                    <input className="input" id="title" type="text"
-                           value={this.state.title}
-                           placeholder="Search by title"
-                           onChange={e => this.updateSearch(e)}/>
+                <div className="filters-wrapper">
+                  <div className="filters-controls">
+                    <h2>Filters</h2>
+                    <button type="button" className={`filters-button${this.state.filters ? " active" : ""}`} onClick={() => this.setState({filters: !this.state.filters})}/>
                   </div>
-                  <div className="field">
-                    <label htmlFor="author">Author:</label>
-                    <input className="input" id="author" type="text"
-                           value={this.state.author}
-                           placeholder="Search by author"
-                           onChange={e => this.updateSearch(e)}/>
-                  </div>
+                  {this.state.filters ?
+                    <div className="filters">
+                      <div className="field">
+                        <label htmlFor="title">Title:</label>
+                        <input className="input" id="title" type="text"
+                               value={this.state.title}
+                               placeholder="Search by title"
+                               onChange={e => this.updateSearch(e)}/>
+                      </div>
+                      <div className="field">
+                        <label htmlFor="author">Author:</label>
+                        <input className="input" id="author" type="text"
+                               value={this.state.author}
+                               placeholder="Search by author"
+                               onChange={e => this.updateSearch(e)}/>
+                      </div>
+                    </div> : null
+                  }
                 </div>
                 <div className="gallery-wrapper">
                   {this.state.pictures.length > 0 && filteredPictures.map(picture => {
