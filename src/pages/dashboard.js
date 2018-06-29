@@ -122,7 +122,7 @@ class DashboardPage extends React.Component {
                   }
                 </div>
                 <div className="gallery-wrapper">
-                  {this.state.pictures.length > 0 && filteredPictures.map(picture => {
+                  {filteredPictures.length > 0 && filteredPictures.map(picture => {
                     let url = 'https://www.flickr.com/photos/' + picture.owner + '/' + picture.id;
                     let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
                     let date = picture.datetaken.match(/\d{4}-\d{2}-\d{2}/);
@@ -142,6 +142,11 @@ class DashboardPage extends React.Component {
                         </div>
                       </div>)
                   })}
+                  {filteredPictures.length === 0 &&
+                  <div className="full-page">
+                    <p>No results!</p>
+                  </div>
+                  }
                   {this.state.error &&
                   <div className="full-page">
                     <p>An error occured!</p>
