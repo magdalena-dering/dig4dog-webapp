@@ -105,7 +105,7 @@ class MapPage extends React.Component {
       <Container>
         <Row>
           <Col xs={12}>
-            <h2 style={{paddingTop: 100}}>Dogs in nearby</h2>
+            <h2 style={{paddingTop: 100, paddingBottom:50}}>Dogs in nearby</h2>
             {this.state.apiError &&
             <div>
               <p style={{textAlign: 'center'}}>Markers cannot be set</p>
