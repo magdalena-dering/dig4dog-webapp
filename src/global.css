@@ -124,6 +124,7 @@ h2 {
   background-position: center;
   border: none;
   padding: 0;
+  cursor: pointer;
   transform: rotate(-180deg);
   transition: transform 0.2s linear; }
   .filters-button.active {

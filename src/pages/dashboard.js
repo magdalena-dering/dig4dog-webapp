@@ -88,6 +88,9 @@ class DashboardPage extends React.Component {
         if (this.state.author.length > 0) {
           return picture.ownername.toLowerCase().indexOf(this.state.author.toLowerCase()) !== -1
         }
+        if (this.state.date) {
+          return moment(picture.datetaken).format("YYYY-MM-DD") === moment(this.state.date).format("YYYY-MM-DD")
+        }
         else {
           return picture
         }
