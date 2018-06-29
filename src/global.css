@@ -53,6 +53,18 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 20px; }
+  .navigation a {
+    text-decoration: none; }
+    .navigation a:hover h1 {
+      color: #FEDB67; }
+  .navigation .map {
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-image: url("media/map.svg"); }
+    .navigation .map:hover {
+      background-image: url("media/map-hover.svg"); }
 
 .full-page {
   width: 100%;

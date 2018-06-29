@@ -73,6 +73,29 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      h1 {
+        color: $yellow;
+      }
+    }
+  }
+
+  .map {
+    width: 30px;
+    height: 30px;
+
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-image: url("media/map.svg");
+
+    &:hover {
+      background-image: url("media/map-hover.svg");
+    }
+  }
 }
 
 .full-page {
