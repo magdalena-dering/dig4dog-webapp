@@ -17,7 +17,9 @@ class DashboardPage extends React.Component {
       page: null,
       loading: false,
       error: false,
-      message: ''
+      message: '',
+      title: '',
+      author: ''
     }
   }
 
@@ -59,40 +61,85 @@ class DashboardPage extends React.Component {
       })
   };
 
+  updateSearch(e) {
+    switch (e.target.id) {
+      case 'title':
+        this.setState({title: e.target.value.substr(0, 20)});
+        break;
+      case 'author':
+        this.setState({author: e.target.value.substr(0, 20)});
+        break;
+      default:
+        this.setState({title: '', author: ''});
+    }
+  }
+
   render() {
+    let filteredPictures = this.state.pictures.filter(
+      picture => {
+        if (this.state.title.length > 0) {
+          return picture.title.toLowerCase().indexOf(this.state.title.toLowerCase()) !== -1
+        }
+        if (this.state.author.length > 0) {
+          return picture.ownername.toLowerCase().indexOf(this.state.author.toLowerCase()) !== -1
+        }
+        else {
+          return picture
+        }
+      }
+    );
+
     return (
       <Container>
         <Row>
           <Col xs={12}>
             {this.state.loading ?
               <Loader/> :
-              <div className="gallery-wrapper" style={{marginTop: 100}}>
-                {this.state.pictures.length > 0 && this.state.pictures.map(picture => {
-                  let url = 'https://www.flickr.com/photos/' + picture.owner + '/' + picture.id;
-                  let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
-                  let date = picture.datetaken.match(/\d{4}-\d{2}-\d{2}/);
-
-                  return (
-                    <div key={picture.id} className="picture">
-                      <a href={url} target="_blank" rel="noopener noreferrer"><img src={path} alt={picture.title}/></a>
-                      <div className="caption">
-                        <p style={{fontWeight: 700}}>{picture.title}</p>
-                        {picture.description._content.length > 0 ? <p>{picture.description._content}</p> : <p>--- no description ---</p>}
-                        <div>
-                          <Link to={routes.USER + picture.owner}>
-                            <p style={{marginRight: 20}}>{picture.ownername}</p>
-                          </Link>
-                          <p>{date}</p>
-                        </div>
-                      </div>
-                    </div>)
-                })}
-                {this.state.error &&
-                <div className="full-page">
-                  <p>An error occured!</p>
-                  <p>{this.state.message}</p>
+              <div>
+                <div className="filters">
+                  <div className="field">
+                    <label htmlFor="title">Title:</label>
+                    <input className="input" id="title" type="text"
+                           value={this.state.title}
+                           placeholder="Search by title"
+                           onChange={e => this.updateSearch(e)}/>
+                  </div>
+                  <div className="field">
+                    <label htmlFor="author">Author:</label>
+                    <input className="input" id="author" type="text"
+                           value={this.state.author}
+                           placeholder="Search by author"
+                           onChange={e => this.updateSearch(e)}/>
+                  </div>
                 </div>
-                }
+                <div className="gallery-wrapper">
+                  {this.state.pictures.length > 0 && filteredPictures.map(picture => {
+                    let url = 'https://www.flickr.com/photos/' + picture.owner + '/' + picture.id;
+                    let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
+                    let date = picture.datetaken.match(/\d{4}-\d{2}-\d{2}/);
+
+                    return (
+                      <div key={picture.id} className="picture">
+                        <a href={url} target="_blank" rel="noopener noreferrer"><img src={path} alt={picture.title}/></a>
+                        <div className="caption">
+                          <p style={{fontWeight: 700}}>{picture.title}</p>
+                          {picture.description._content.length > 0 ? <p>{picture.description._content}</p> : <p>--- no description ---</p>}
+                          <div>
+                            <Link to={routes.USER + picture.owner}>
+                              <p style={{marginRight: 20}}>{picture.ownername}</p>
+                            </Link>
+                            <p>{date}</p>
+                          </div>
+                        </div>
+                      </div>)
+                  })}
+                  {this.state.error &&
+                  <div className="full-page">
+                    <p>An error occured!</p>
+                    <p>{this.state.message}</p>
+                  </div>
+                  }
+                </div>
               </div>
             }
           </Col>
