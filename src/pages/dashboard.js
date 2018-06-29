@@ -1,6 +1,8 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-grid-system';
 import {Link, withRouter} from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
 import * as routes from '../shared/routes';
 import {getPictures} from '../api';
@@ -8,6 +10,7 @@ import {setPictures, loadPictures} from '../shared/helper';
 
 import Loader from '../components/Loader';
 
+import 'react-datepicker/dist/react-datepicker.css';
 
 class DashboardPage extends React.Component {
   constructor(props) {
@@ -20,7 +23,8 @@ class DashboardPage extends React.Component {
       message: '',
       filters: false,
       title: '',
-      author: ''
+      author: '',
+      date: null
     }
   }
 
@@ -118,6 +122,13 @@ class DashboardPage extends React.Component {
                                placeholder="Search by author"
                                onChange={e => this.updateSearch(e)}/>
                       </div>
+                      <div className="field">
+                        <label htmlFor="">Date:</label>
+                        <DatePicker selected={this.state.date}
+                                    onChange={date => this.setState({date: date})}
+                                    placeholderText="Search by date"
+                                    dateFormat="YYYY-MM-DD"/>
+                      </div>
                     </div> : null
                   }
                 </div>
@@ -125,7 +136,7 @@ class DashboardPage extends React.Component {
                   {filteredPictures.length > 0 && filteredPictures.map(picture => {
                     let url = 'https://www.flickr.com/photos/' + picture.owner + '/' + picture.id;
                     let path = 'https://farm' + picture.farm + '.staticflickr.com/' + picture.server + '/' + picture.id + '_' + picture.secret + '.jpg';
-                    let date = picture.datetaken.match(/\d{4}-\d{2}-\d{2}/);
+                    let date = moment(picture.datetaken).format("YYYY-MM-DD");
 
                     return (
                       <div key={picture.id} className="picture">

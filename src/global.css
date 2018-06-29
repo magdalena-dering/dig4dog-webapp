@@ -144,6 +144,15 @@ h2 {
       height: 100px;
       flex-direction: row;
       margin-left: 50px; } }
+  .filters .field {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    @media (min-width: 768px) {
+      .filters .field {
+        margin-left: 20px; } }
+    .filters .field label {
+      width: 55px; }
 
 .gallery-wrapper {
   position: relative;

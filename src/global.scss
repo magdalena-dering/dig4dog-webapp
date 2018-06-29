@@ -196,6 +196,26 @@ h2 {
     flex-direction: row;
     margin-left: 50px;
   }
+
+  .field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      margin-left: 20px;
+    }
+
+    label {
+      width: 55px;
+    }
+  }
+
+  .react-datepicker__input-container {
+    input {
+
+    }
+  }
 }
 
 .gallery-wrapper {
