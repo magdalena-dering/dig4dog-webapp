@@ -86,14 +86,31 @@ class MapPage extends React.Component {
             this.setState({apiError: true, apiMessage: resp.message})
           } else {
             if (this.props) {
-              new this.props.google.maps.Marker({
+              let marker = new this.props.google.maps.Marker({
+                content: [
+                  (resp.photo.location.country ? resp.photo.location.country._content : '---'),
+                  (resp.photo.location.locality ? resp.photo.location.locality._content : '---'),
+                  (resp.photo.location.neighbourhood ? resp.photo.location.neighbourhood._content : '---')
+                ],
                 position: {lat: parseFloat(resp.photo.location.latitude), lng: parseFloat(resp.photo.location.longitude)},
                 map: this.map,
                 icon: Marker
               });
+
+              let country = marker.content[0];
+              let city = marker.content[1];
+              let place = marker.content[2];
+
+              let infowindow = new this.props.google.maps.InfoWindow({
+                content: country + ', ' + city + ', ' + place
+              });
+
+              this.props.google.maps.event.addListener(marker, 'click', () => {
+                infowindow.open(this.map, marker);
+              });
             }
           }
-        }))
+        }));
   };
 
   loadMap(latitude, longitude) {

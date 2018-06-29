@@ -267,3 +267,6 @@ input[type=text] {
   margin: 10px; }
   input[type=text]:focus {
     border: 1px solid #FACB6F; }
+
+.gm-style-iw {
+  font-family: 'Anonymous Pro', monospace; }
