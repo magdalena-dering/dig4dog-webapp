@@ -247,10 +247,12 @@ h2 {
   .button:hover {
     color: #FEDB67; }
   .button:disabled {
-    opacity: 0.5;
+    background-color: transparent;
+    border-color: transparent;
+    color: #070707;
     cursor: not-allowed; }
     .button:disabled:hover {
-      color: #FFFCF2; }
+      color: #070707; }
 
 .blink {
   animation: blink-animation 1s steps(5, start) infinite; }
