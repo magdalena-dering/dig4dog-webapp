@@ -63,6 +63,7 @@ h2 {
 .background {
   min-height: 100vh;
   background-image: url("./media/halftone-yellow.png");
+  background-color: $yellow;
 }
 
 .navigation-wrapper {
@@ -132,7 +133,7 @@ h2 {
   }
 }
 
-.filters-wrapper {
+.wrapper {
   width: 100%;
   height: auto;
   margin-top: 100px;
@@ -143,6 +144,17 @@ h2 {
   @media (min-width: 768px) {
     height: 100px;
     flex-direction: row;
+    justify-content: space-between;
+
+    .button {
+      margin-right: 0;
+    }
+  }
+}
+
+.filters-wrapper {
+  @media (min-width: 768px) {
+    justify-content: flex-start;
   }
 
   .filters-controls {
@@ -328,11 +340,21 @@ h2 {
   text-transform: uppercase;
   text-decoration: none;
   background-color: black;
+  cursor: pointer;
   border: 1px solid black;
   margin: 20px auto;
 
   &:hover {
     color: $yellow;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      color: $white;
+    }
   }
 }
 

@@ -13,12 +13,16 @@ class MapPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: null,
       ids: [],
       loading: false,
       error: false,
       message: '',
       apiError: false,
-      apiMessage: ''
+      apiMessage: '',
+      latitude: null,
+      longitude: null,
+      disabled: false
     }
   }
 
@@ -32,6 +36,7 @@ class MapPage extends React.Component {
 
       geolocation.getCurrentPosition((position) => {
         resolve(position);
+        this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
         this.loadMap(position.coords.latitude, position.coords.longitude);
         this.fetchPictures(0, position.coords.latitude, position.coords.longitude);
       }, () => {
@@ -49,17 +54,22 @@ class MapPage extends React.Component {
       .then(resp => {
         if (resp.message) {
           this.setState({loading: false, error: true, message: resp.message});
+          console.log(resp)
         }
         else {
-          let ids = [];
+          let ids = this.state.ids;
 
           resp.photos.photo.forEach(photo => {
             ids.push(photo.id);
           });
 
-          if (ids.length > 0) {
-            this.setState({ids: ids, loading: false})
-          } else {
+          if (ids.length > 0 && this.state.page < resp.photos.pages) {
+            this.setState({ids: ids, loading: false, page: resp.photos.page})
+          }
+          else if (ids.length > 0 && this.state.ids.length === parseInt(resp.photos.total, 10)) {
+            this.setState({loading: false, disabled: true})
+          }
+          else {
             this.setState({loading: false})
           }
         }
@@ -75,7 +85,6 @@ class MapPage extends React.Component {
           if (resp.message) {
             this.setState({apiError: true, apiMessage: resp.message})
           } else {
-
             if (this.props) {
               new this.props.google.maps.Marker({
                 position: {lat: parseFloat(resp.photo.location.latitude), lng: parseFloat(resp.photo.location.longitude)},
@@ -105,7 +114,12 @@ class MapPage extends React.Component {
       <Container>
         <Row>
           <Col xs={12}>
-            <h2 style={{paddingTop: 100, paddingBottom:50}}>Dogs in nearby</h2>
+            <div className="wrapper">
+              <h2>{this.state.loading ? '..' : this.state.ids.length} dogs in nearby</h2>
+              <button disabled={this.state.disabled} className="button" type="button" onClick={() => this.fetchPictures(this.state.page + 1, this.state.latitude, this.state.longitude)}>
+                {this.state.disabled ? "No more dogs!" : "Gimme more dogs!"}
+              </button>
+            </div>
             {this.state.apiError &&
             <div>
               <p style={{textAlign: 'center'}}>Markers cannot be set</p>

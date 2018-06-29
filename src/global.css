@@ -42,7 +42,8 @@ h2 {
 
 .background {
   min-height: 100vh;
-  background-image: url("./media/halftone-yellow.png"); }
+  background-image: url("./media/halftone-yellow.png");
+  background-color: #FEDB67; }
 
 .navigation-wrapper {
   position: fixed;
@@ -91,7 +92,7 @@ h2 {
       line-height: 26px;
       margin-bottom: 20px; }
 
-.filters-wrapper {
+.wrapper {
   width: 100%;
   height: auto;
   margin-top: 100px;
@@ -99,20 +100,28 @@ h2 {
   flex-direction: column;
   align-items: center; }
   @media (min-width: 768px) {
-    .filters-wrapper {
+    .wrapper {
       height: 100px;
-      flex-direction: row; } }
-  .filters-wrapper .filters-controls {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 30px; }
-    @media (min-width: 768px) {
-      .filters-wrapper .filters-controls {
-        width: 150px;
-        margin-bottom: 0; } }
+      flex-direction: row;
+      justify-content: space-between; }
+      .wrapper .button {
+        margin-right: 0; } }
+
+@media (min-width: 768px) {
+  .filters-wrapper {
+    justify-content: flex-start; } }
+
+.filters-wrapper .filters-controls {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px; }
+  @media (min-width: 768px) {
+    .filters-wrapper .filters-controls {
+      width: 150px;
+      margin-bottom: 0; } }
 
 .filters-button {
   width: 30px;
@@ -232,10 +241,16 @@ h2 {
   text-transform: uppercase;
   text-decoration: none;
   background-color: black;
+  cursor: pointer;
   border: 1px solid black;
   margin: 20px auto; }
   .button:hover {
     color: #FEDB67; }
+  .button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed; }
+    .button:disabled:hover {
+      color: #FFFCF2; }
 
 .blink {
   animation: blink-animation 1s steps(5, start) infinite; }

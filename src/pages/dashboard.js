@@ -104,7 +104,7 @@ class DashboardPage extends React.Component {
             {this.state.loading ?
               <Loader/> :
               <div>
-                <div className="filters-wrapper">
+                <div className="filters-wrapper wrapper">
                   <div className="filters-controls">
                     <h2>Filters</h2>
                     <button type="button" className={`filters-button${this.state.filters ? " active" : ""}`} onClick={() => this.setState({filters: !this.state.filters})}/>
