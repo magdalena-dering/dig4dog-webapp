@@ -1,4 +1,4 @@
-## dog4dog Web application based on React and Flickr API
+# Dog4Dog - web application based on React and Flickr API
 
 Preview: https://dog4dog.surge.sh
 
@@ -14,7 +14,7 @@ Features:
 - map of dogs using geolocation (10 of them in users area)
 
 
-# Setup
+## Setup
 To run this project, install it locally using npm:
 
 ```
