@@ -20,8 +20,8 @@ class MapPage extends React.Component {
       message: '',
       apiError: false,
       apiMessage: '',
-      latitude: null,
-      longitude: null,
+      latitude: 52.237049,
+      longitude: 21.017532,
       disabled: false
     }
   }
@@ -36,12 +36,12 @@ class MapPage extends React.Component {
 
       geolocation.getCurrentPosition((position) => {
         resolve(position);
-        this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
+        this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude});
         this.loadMap(position.coords.latitude, position.coords.longitude);
         this.fetchPictures(0, position.coords.latitude, position.coords.longitude);
       }, () => {
-        this.loadMap(52.237049, 21.017532);
-        this.fetchPictures(0, 52.237049, 21.017532);
+        this.loadMap(this.state.latitude, this.state.longitude);
+        this.fetchPictures(0, this.state.latitude, this.state.longitude);
       });
     });
   };
@@ -83,7 +83,7 @@ class MapPage extends React.Component {
         .then(resp => resp.json())
         .then(resp => {
           if (resp.message) {
-            this.setState({apiError: true, apiMessage: resp.message})
+            this.setState({apiError: true, apiMessage: resp.message, disabled: true})
           } else {
             if (this.props) {
               let marker = new this.props.google.maps.Marker({
@@ -161,6 +161,6 @@ class MapPage extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCV3njd6dOdoElCW2ZBxegOOfWf1k9Rxas',
+  apiKey: `${process.env.NODE_ENV === 'development' ? 'AIzaSyCV3njd6dOdoElCW2ZBxegOOfWf1k9Rxas' : 'AIzaSyDfkOqIYti5wAdpjsRrYTm-lGjbdxD4iVI'}`,
   LoadingContainer: Loader
 })(MapPage)
