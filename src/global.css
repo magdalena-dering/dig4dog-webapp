@@ -94,6 +94,8 @@ h2 {
     .full-page.landing h2 {
       line-height: 26px;
       margin-bottom: 20px; }
+    .full-page.landing .button {
+      margin: 20px 0; }
 
 .wrapper {
   width: 100%;

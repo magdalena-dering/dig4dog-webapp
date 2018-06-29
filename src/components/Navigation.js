@@ -11,7 +11,7 @@ export default () =>
       <Row>
         <Col>
           <div className="navigation">
-            <Link to={routes.DASHBOARD}><h1>Dog4Dog</h1></Link>
+            <Link to={routes.DASHBOARD}><h1>Dig4Dog</h1></Link>
             <div>
               <Link to={routes.MAP}>
                 <div className="map"/>
