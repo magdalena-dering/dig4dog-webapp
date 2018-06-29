@@ -127,8 +127,10 @@ class DashboardPage extends React.Component {
                       </div>
                       <div className="field">
                         <label htmlFor="">Date:</label>
-                        <DatePicker selected={this.state.date}
+                        <DatePicker calendarClassName="calendar"
+                                    selected={this.state.date}
                                     onChange={date => this.setState({date: date})}
+                                    todayButton="Today"
                                     placeholderText="Search by date"
                                     dateFormat="YYYY-MM-DD"/>
                       </div>

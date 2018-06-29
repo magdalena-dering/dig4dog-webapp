@@ -394,3 +394,84 @@ input[type=text] {
 .gm-style-iw {
   font-family: 'Anonymous Pro', monospace;
 }
+
+.calendar {
+  font-family: 'Anonymous Pro', monospace;
+  color: $black;
+  background-color: $white;
+  border-color: $black;
+  border-radius: 0;
+
+  .react-datepicker__header {
+    background-color: $black;
+    border-radius: 0;
+    border-bottom-color: $black;
+  }
+
+  .react-datepicker__navigation--previous {
+    border-right-color: $white;
+
+    &:hover {
+      border-right-color: $yellow;
+    }
+  }
+
+  .react-datepicker__navigation--next {
+    border-left-color: $white;
+
+    &:hover {
+      border-left-color: $yellow;
+    }
+  }
+
+  .react-datepicker__current-month, .react-datepicker-time__header,
+  .react-datepicker__day-name {
+    color: $white;
+  }
+
+  .react-datepicker__day:hover {
+    color: $black;
+    background-color: $yellow;
+    border-radius: 0;
+  }
+
+  .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range,
+  .react-datepicker__day--keyboard-selected {
+    color: $black;
+    background-color: $orange;
+    border-radius: 0;
+  }
+
+  .react-datepicker__today-button {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: $black;
+    border-top: 1px solid $black;
+
+    &:hover {
+      color: $yellow;
+    }
+  }
+}
+
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle, .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
+  border-bottom-color: $black;
+}
+
+.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before {
+  border-top-color: $black;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
+  border-bottom-color: $black;
+}
+
+.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before {
+  border-top-color: $black;
+}
