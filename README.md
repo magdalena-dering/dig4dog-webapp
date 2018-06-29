@@ -1,8 +1,9 @@
-# Dog4Dog - web application based on React and Flickr API
+# Dig4Dog - web application based on React and Flickr API
 
-Preview: https://dog4dog.surge.sh
+Preview: https://dig4dog.surge.sh
 
 Gallery of dogs made as an recruitment task.
+
 
 Features:
 - geting photos of dogs with captions with title, author, date, description (if available)
@@ -11,7 +12,9 @@ Features:
 - infinite scroll
 - error handling
 - loading indicators
-- map of dogs using geolocation (10 of them in users area
+- map of dogs using geolocation (initially 10 of them in users area)
+- possibility to upload more dog photos from area
+- map marker shows location of photoshoot
 - filtering by title, author and date
 
 
@@ -26,5 +29,5 @@ $ npm start
 
 Author: Natalia Kulas
 
-Credits: Icons made by Freepik and others from www.flaticon.com
+Credits: Icons made by Freepik, Chanut and others from www.flaticon.com
 
