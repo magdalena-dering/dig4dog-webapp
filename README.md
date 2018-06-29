@@ -11,7 +11,8 @@ Features:
 - infinite scroll
 - error handling
 - loading indicators
-- map of dogs using geolocation (10 of them in users area)
+- map of dogs using geolocation (10 of them in users area
+- filtering by title, author and date
 
 
 ## Setup
@@ -24,5 +25,6 @@ $ npm start
 ```
 
 Author: Natalia Kulas
+
 Credits: Icons made by Freepik and others from www.flaticon.com
 
