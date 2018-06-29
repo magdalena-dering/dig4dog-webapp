@@ -161,6 +161,6 @@ class MapPage extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAGLEOolFTmtUnGAKOKWKBes5zE3Cqf6bg',
+  apiKey: 'AIzaSyCV3njd6dOdoElCW2ZBxegOOfWf1k9Rxas',
   LoadingContainer: Loader
 })(MapPage)
