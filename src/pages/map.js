@@ -17,17 +17,34 @@ class MapPage extends React.Component {
       loading: false,
       error: false,
       message: '',
+      apiError: false,
+      apiMessage: ''
     }
   }
 
   componentDidMount() {
-    this.fetchPictures(0)
-  }
+    const geolocation = navigator.geolocation;
 
-  fetchPictures = (page) => {
+    new Promise((resolve, reject) => {
+      if (!geolocation) {
+        alert('Gelocation not supported');
+      }
+
+      geolocation.getCurrentPosition((position) => {
+        resolve(position);
+        this.loadMap(position.coords.latitude, position.coords.longitude);
+        this.fetchPictures(0, position.coords.latitude, position.coords.longitude);
+      }, () => {
+        this.loadMap(52.237049, 21.017532);
+        this.fetchPictures(0, 52.237049, 21.017532);
+      });
+    });
+  };
+
+  fetchPictures = (page, latitude, longitude) => {
     this.setState({loading: true});
 
-    fetch(getPicturesWithLocations(page, 52.237049, 21.017532))
+    fetch(getPicturesWithLocations(page, latitude, longitude))
       .then(resp => resp.json())
       .then(resp => {
         if (resp.message) {
@@ -47,17 +64,16 @@ class MapPage extends React.Component {
           }
         }
       })
-      .then(() => this.loadMap())
-      .then(() => this.setMarkers());
+      .then(() => this.setMarkers())
   };
 
   setMarkers = () => {
-    this.state.ids.forEach(id => {
-      fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=be817c154904ed005a7309931302292b&photo_id=${id}&format=json&nojsoncallback=1`)
+    this.state.ids.forEach(id =>
+      fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=4c09c61bc069a47addbbaf2b3003c6b2&photo_id=${id}&format=json&nojsoncallback=1`)
         .then(resp => resp.json())
         .then(resp => {
           if (resp.message) {
-            this.setState({loading: false, error: true, message: resp.message});
+            this.setState({apiError: true, apiMessage: resp.message})
           } else {
 
             if (this.props) {
@@ -68,17 +84,17 @@ class MapPage extends React.Component {
               });
             }
           }
-        })
-    })
+        }))
   };
 
-  loadMap() {
+  loadMap(latitude, longitude) {
     if (this.props) {
       const mapConfig = Object.assign({}, {
-        center: {lat: 52.237049, lng: 21.017532},
+        center: {lat: latitude, lng: longitude},
         zoom: 11,
         mapTypeId: 'roadmap',
-        styles: MapStyles
+        styles: MapStyles,
+        icon: Marker
       });
       this.map = new this.props.google.maps.Map(this.refs.map, mapConfig);
     }
@@ -90,6 +106,11 @@ class MapPage extends React.Component {
         <Row>
           <Col xs={12}>
             <h2 style={{paddingTop: 100}}>Dogs in nearby</h2>
+            {this.state.apiError &&
+            <div>
+              <p style={{textAlign: 'center'}}>Markers cannot be set</p>
+              <p style={{textAlign: 'center'}}>{this.state.apiMessage}</p>
+            </div>}
             <div className="full-page">
               {this.state.error ?
                 <div>
@@ -97,9 +118,7 @@ class MapPage extends React.Component {
                   <p>{this.state.message}</p>
                 </div> :
                 <div ref="map" style={{width: '100%', height: '75vh'}}>
-                  <div className="full-page">
-                    <p>Loading map...</p>
-                  </div>
+                  <div className="full-page"/>
                 </div>
               }
             </div>
@@ -111,6 +130,6 @@ class MapPage extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAR5fkhOWtnrd2SC09-ZKOXjHZKrhElaec',
+  apiKey: 'AIzaSyAGLEOolFTmtUnGAKOKWKBes5zE3Cqf6bg',
   LoadingContainer: Loader
 })(MapPage)
