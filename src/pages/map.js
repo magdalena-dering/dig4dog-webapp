@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'react-grid-system';
 import {GoogleApiWrapper} from 'google-maps-react' ;
 
-import {getPicturesWithLocations} from '../api';
+import {getPicturesWithLocations, getLocationsById} from '../api';
 
 import Loader from '../components/Loader';
 import MapStyles from '../media/styles';
@@ -79,7 +79,7 @@ class MapPage extends React.Component {
 
   setMarkers = () => {
     this.state.ids.forEach(id =>
-      fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=4c09c61bc069a47addbbaf2b3003c6b2&photo_id=${id}&format=json&nojsoncallback=1`)
+      fetch(getLocationsById(id))
         .then(resp => resp.json())
         .then(resp => {
           if (resp.message) {
