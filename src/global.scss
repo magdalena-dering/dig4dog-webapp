@@ -84,6 +84,14 @@ h2 {
   align-items: center;
   padding: 20px;
 
+  > div {
+    width: 75px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   a {
     text-decoration: none;
 
@@ -94,17 +102,40 @@ h2 {
     }
   }
 
-  .map {
+  button {
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .map,
+  .up {
     width: 30px;
     height: 30px;
 
     background-repeat: no-repeat;
     background-size: 30px;
+    cursor: pointer;
+  }
+
+  .map {
     background-image: url("media/map.svg");
 
     &:hover {
       background-image: url("media/map-hover.svg");
     }
+  }
+
+  .up {
+    background-image: url("media/up-arrow.svg");
+
+    &:hover {
+      background-image: url("media/up-arrow-hover.svg");
+    }
+  }
+
+  .hidden:focus {
+    outline: none;
   }
 }
 

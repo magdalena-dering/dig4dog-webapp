@@ -61,18 +61,37 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 20px; }
+  .navigation > div {
+    width: 75px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; }
   .navigation a {
     text-decoration: none; }
     .navigation a:hover h1 {
       color: #FEDB67; }
-  .navigation .map {
+  .navigation button {
+    background: transparent;
+    border: none;
+    padding: 0; }
+  .navigation .map,
+  .navigation .up {
     width: 30px;
     height: 30px;
     background-repeat: no-repeat;
     background-size: 30px;
+    cursor: pointer; }
+  .navigation .map {
     background-image: url("media/map.svg"); }
     .navigation .map:hover {
       background-image: url("media/map-hover.svg"); }
+  .navigation .up {
+    background-image: url("media/up-arrow.svg"); }
+    .navigation .up:hover {
+      background-image: url("media/up-arrow-hover.svg"); }
+  .navigation .hidden:focus {
+    outline: none; }
 
 .full-page {
   width: 100%;
