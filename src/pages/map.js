@@ -6,7 +6,7 @@ import {getPicturesWithLocations, getLocationsById} from '../api';
 
 import Loader from '../components/Loader';
 import MapStyles from '../media/styles';
-import Marker from '../media/location-marker.png';
+import Marker from '../media/location-marker.svg';
 
 
 class MapPage extends React.Component {
